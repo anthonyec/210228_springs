@@ -1,3 +1,8 @@
+export interface SpringInitialValues {
+  x: number;
+  v: number;
+}
+
 export interface SpringProperties {
   stiffness: number;
   mass: number;
@@ -8,8 +13,6 @@ export interface EnviromentProperties {
   frameRate: number;
 }
 
-interface Spring {}
-
 interface SpringUpdate {
   /** Spring position */
   x: number;
@@ -18,22 +21,39 @@ interface SpringUpdate {
   v: number;
 }
 
+interface Spring {
+  addVelocity: (velocity: number) => void;
+  setLength: (length: number) => void;
+  setProperties: (props: SpringProperties) => void;
+  update: () => SpringUpdate;
+  reset: () => void;
+}
+
+const DEFAULT_INITIAL_VALUES: SpringInitialValues = {
+  x: 0,
+  v: 0
+}
+
 export function createSpring(
-  spring: SpringProperties,
+  // TODO: Extend default initial values
+  initialValues: SpringInitialValues,
+  springProperties: SpringProperties,
   enviroment: EnviromentProperties = {
-    frameRate: 1 / 60
+    frameRate: 60
   }
 ): Spring {
+  let spring = springProperties;
+  const frameTime = 1 / enviroment.frameRate;
+
   /* Spring Length, set to 1 for simplicity */
-  let springLength = 10;
+  let springLength = initialValues.x;
 
   /* Object position and velocity. */
-  let x = 0;
-  let v = 0;
+  let x = initialValues.x;
+  let v = initialValues.v;
 
   /* Spring stiffness, in kg / s^2 */
   let k = -spring.stiffness;
-
   let d = -spring.damping;
 
   return {
@@ -44,17 +64,32 @@ export function createSpring(
     setLength(length: number) {
       springLength = length;
     },
+    setProperties(props: SpringProperties) {
+      // TODO: Update these values in a better way
+      spring = {
+        ...spring,
+        ...props
+      };
+
+      k = -spring.stiffness;
+      d = -spring.damping;
+    },
     update(): SpringUpdate {
       let Fspring = k * (x - springLength);
       let Fdamping = d * v;
       let a = (Fspring + Fdamping) / spring.mass;
 
-      v += a * enviroment.frameRate;
-      x += v * enviroment.frameRate;
+      v += a * frameTime;
+      x += v * frameTime;
 
       return {
         v, x
       }
+    },
+    reset() {
+      v = 0;
+      x = 0;
+      springLength = 0;
     }
   }
 }

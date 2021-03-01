@@ -1,9 +1,58 @@
 <style>
+  body {
+    font-family: monospace;
+    background: black;
+  }
+
   canvas {
-    outline: 1px solid black;
+    border: 2px solid white;
+    border-radius: 20px;
+  }
+
+  .playground {
+    display: inline-block;
+    position: relative;
+  }
+
+  .controls {
+    color: white;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    padding: 5px;
+  }
+
+  .controls label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    user-select: none;
+  }
+
+  .controls input {
+    backdrop-filter: blur(5px);
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 3px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: monospace;
+    padding: 5px 8px;
+    display: block;
+    margin-top: 5px;
+  }
+
+  .controls input:focus {
+    border-color: #F85032;
+    outline: none;
   }
 </style>
 
-<canvas width="1024" height="768"></canvas>
+<div class="playground">
+  <canvas width="600" height="600"></canvas>
+  <div class="controls"></div>
+</div>
+
 
 <script src="app.ts"></script>
