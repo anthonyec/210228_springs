@@ -31,15 +31,15 @@ interface Spring {
 
 const DEFAULT_INITIAL_VALUES: SpringInitialValues = {
   x: 0,
-  v: 0
-}
+  v: 0,
+};
 
 export function createSpring(
   // TODO: Extend default initial values
   initialValues: SpringInitialValues,
   springProperties: SpringProperties,
   enviroment: EnviromentProperties = {
-    frameRate: 60
+    frameRate: 60,
   }
 ): Spring {
   let spring = springProperties;
@@ -58,7 +58,7 @@ export function createSpring(
 
   return {
     addVelocity(velocity: number) {
-      console.log('addVelocity');
+      console.log("addVelocity");
       v += velocity;
     },
     setLength(length: number) {
@@ -68,7 +68,7 @@ export function createSpring(
       // TODO: Update these values in a better way
       spring = {
         ...spring,
-        ...props
+        ...props,
       };
 
       k = -spring.stiffness;
@@ -83,13 +83,14 @@ export function createSpring(
       x += v * frameTime;
 
       return {
-        v, x
-      }
+        v,
+        x,
+      };
     },
     reset() {
       v = 0;
       x = 0;
       springLength = 0;
-    }
-  }
+    },
+  };
 }

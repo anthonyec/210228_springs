@@ -5,8 +5,8 @@ export function createValueFlipper<A, B>() {
     const flippedValue = flipped ? a : b;
     flipped = !flipped;
     return flippedValue;
-  }
-};
+  };
+}
 
 export function createUpdateAtFrameRate(fps: number) {
   const frameLengthMs = 1000 / fps;
@@ -20,5 +20,5 @@ export function createUpdateAtFrameRate(fps: number) {
     }
 
     lastDrawTime = Date.now();
-  }
+  };
 }
