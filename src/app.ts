@@ -3,7 +3,7 @@ import { createValueFlipper } from "./utils/logic";
 import { createSpring, SpringProperties } from "./spring";
 
 let coolSpringProperites: SpringProperties = {
-  stiffness: 381.47,
+  stiffness: 381,
   mass: 1,
   damping: 20,
 };
@@ -18,7 +18,7 @@ function drawGraph(props: SpringProperties) {
   const spacing = canvas.width / m;
 
   context.strokeStyle = "#E4B8EA";
-  context.lineWidth = 2;
+  context.lineWidth = 3;
   context.beginPath();
 
   for (let i = 0; i < m; i++) {
@@ -42,9 +42,8 @@ function update() {
   drawGraph(coolSpringProperites);
 
   context.fillStyle = "#F85032";
-
   context.beginPath();
-  context.arc(canvas.width / 2 - 88 + 22, x + 22, 22, 0, 2 * Math.PI);
+  context.arc(canvas.width / 2, x + 22, 22, 0, 2 * Math.PI);
   context.fill();
 
   window.requestAnimationFrame(update);
@@ -75,6 +74,13 @@ function controls(dom: HTMLElement, props, settings, onUpdate) {
     label.textContent = key;
     input.value = value;
     input.type = "number";
+
+    if (settings[key]) {
+      Object.keys(settings[key]).forEach((setting) => {
+        const settingValue = settings[key][setting];
+        input.setAttribute(setting, settingValue);
+      });
+    }
 
     label.appendChild(input);
     dom.appendChild(label);

@@ -4,28 +4,26 @@
     background: black;
   }
 
-  canvas {
-    border: 3px solid white;
-    border-radius: 20px;
-  }
-
   .playground {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    border: 3px solid white;
+    border-radius: 16px;
     position: relative;
+    overflow: hidden;
+    width: 400px;
   }
 
   .controls {
+    border-left: 3px solid white;
+    width: 100%;
     color: white;
-    position: absolute;
-    width: 110px;
-    top: 20px;
-    right: 25px;
-    padding: 5px;
+    padding: 12px 18px;
   }
 
   .controls label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 18px;
     user-select: none;
   }
@@ -52,7 +50,7 @@
 </style>
 
 <div class="playground">
-  <canvas width="400" height="400"></canvas>
+  <canvas width="250" height="400"></canvas>
   <div class="controls"></div>
 </div>
 
