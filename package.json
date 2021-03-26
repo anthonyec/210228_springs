@@ -14,5 +14,8 @@
     "parcel": "^1.12.4",
     "prettier": "^2.2.1",
     "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "frames": "git+ssh://git@github.com/anthonyec/rect.git#28da6e50bac586d7723e88554bc4441a185b84b2"
   }
 }

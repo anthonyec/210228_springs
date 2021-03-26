@@ -58,7 +58,7 @@ export function createSpring(
 
   return {
     addVelocity(velocity: number) {
-      console.log("addVelocity");
+      console.log('addVelocity');
       v += velocity;
     },
     setLength(length: number) {
